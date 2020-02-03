@@ -31,6 +31,9 @@ class Mysql(object):
     def delete(self, table_name, **kwargs):
         self.executeSql(delete(table_name, **kwargs))
 
+    def update(self, table_name, new_items, where={}):
+        self.executeSql(update(table_name, new_items, where))
+
     def select(self, table_name, column_names=[], where={}, limit=None, offset=0):
         self.executeSql(select(table_name, column_names, where, limit, offset))
         return self.cursor.fetchall()

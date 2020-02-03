@@ -21,7 +21,7 @@ if __name__ == '__main__':
     #     for each in results:
     #         print(each)
     # print(insert("imgs", src="https://demo.com/test.jpg", alert="test"))
-    # print(delete("imgs", id=12, alert="test"))
+    print(delete("imgs", id=12))
     # print(
     #     select("imgs",
     #            column_names=["src", "alert"],
@@ -31,6 +31,6 @@ if __name__ == '__main__':
     #            },
     #            limit=100,
     #            offset=10))
-    with Mysql(**mysql) as m:
-        # m.insert("imgs", src="https://example.com/test.jpg", alert="test")
-        m.delete("imgs", id=353)
+    # with Mysql(**mysql) as m:
+    #     # m.insert("imgs", src="https://example.com/test.jpg", alert="test")
+    #     m.delete("imgs", id=353)

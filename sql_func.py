@@ -13,7 +13,7 @@ def insert(table_name, **kwargs):
     field = field[:-1] + ') VALUES ('
 
     for each in kwargs.values():
-        field += '"' + each + '",'
+        field += '"' + str(each) + '",'
     field = field[:-1] + ');'
 
     sql = "INSERT INTO %s %s" % (table_name, field)
@@ -32,6 +32,28 @@ def delete(table_name, **kwargs):
             field += item[0] + '="' + str(item[1]) + '" AND '
         field = field[:-5]
     sql = "DELETE FROM %s%s;" % (table_name, field)
+    return sql
+
+
+def update(table_name, new_items, where={}):
+    """
+    UPDATE table_name SET field1=new-value1, field2=new-value2
+    [WHERE Clause]
+    """
+    field = ""
+    where_part = ""
+
+    for item in new_items.items():
+        field += str(item[0]) + '="' + str(item[1]) + '" AND '
+    field = field[:-5]
+
+    if len(where):
+        where_part = " WHERE "
+        for item in where.items():
+            where_part += str(item[0]) + '="' + str(item[1]) + '" AND '
+        where_part = where_part[:-5]
+
+    sql = "UPDATE %s SET %s%s;" % (table_name, field, where_part)
     return sql
 
 

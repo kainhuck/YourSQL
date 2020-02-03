@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import pymysql
+from sql_func import *
 
 class Mysql(object):
     def __init__(self, host, username, passwd, database):
@@ -23,6 +24,16 @@ class Mysql(object):
 
         self.db.close()
         return True
+
+    def insert(self, table_name, **kwargs):
+        self.executeSql(insert(table_name, **kwargs))
+
+    def delete(self, table_name, **kwargs):
+        self.executeSql(delete(table_name, **kwargs))
+
+    def select(self, table_name, column_names=[], where={}, limit=None, offset=0):
+        self.executeSql(select(table_name, column_names, where, limit, offset))
+        return self.cursor.fetchall()
 
     def executeSql(self, sql):
         try:

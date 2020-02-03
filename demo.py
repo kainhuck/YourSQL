@@ -21,7 +21,7 @@ if __name__ == '__main__':
     #     for each in results:
     #         print(each)
     # print(insert("imgs", src="https://demo.com/test.jpg", alert="test"))
-    print(delete("imgs", id=12))
+    # print(delete("imgs", id=12))
     # print(
     #     select("imgs",
     #            column_names=["src", "alert"],
@@ -34,3 +34,9 @@ if __name__ == '__main__':
     # with Mysql(**mysql) as m:
     #     # m.insert("imgs", src="https://example.com/test.jpg", alert="test")
     #     m.delete("imgs", id=353)
+
+    print(update("test", new_items={"name": "kangkang"}))
+
+    # with Mysql(**mysql) as m:
+    #     for i in range(10):
+    #         m.insert("test", id=i, name="name_" + str(i))

@@ -23,13 +23,15 @@ def insert(table_name, **kwargs):
 def delete(table_name, **kwargs):
     """
     构造sql删除语句
-    delete from <table_name> where <>="<>" and <>="<>";
+    delete from <table_name>[ where <>="<>" and <>="<>"];
     """
     field = ''
-    for item in kwargs.items():
-        field += item[0] + '="' + str(item[1]) + '" AND '
-    field = field[:-5] + ';'
-    sql = "DELETE FROM %s WHERE %s" % (table_name, field)
+    if len(kwargs):
+        field = " WHERE "
+        for item in kwargs.items():
+            field += item[0] + '="' + str(item[1]) + '" AND '
+        field = field[:-5]
+    sql = "DELETE FROM %s%s;" % (table_name, field)
     return sql
 
 

@@ -1,10 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# 这个是用于将数据存进MySQL，将其稍微封装了一下，方便使用
-
 import pymysql
-from .security_data import mysql
 
 class Mysql(object):
     def __init__(self, host, username, passwd, database):
@@ -36,34 +33,3 @@ class Mysql(object):
         except:
             # 如果发生错误则回滚
             self.db.rollback()
-
-
-def insert_into_db(table_name, **kwargs):
-    '''
-    构造sql插入语句
-    :param table_name:
-    :param kwargs:
-    :return:
-    '''
-    # 创建sql语句
-    field = '('
-    for each in kwargs.keys():
-        field += each + ","
-    field = field[:-1] + ') VALUES ('
-
-    for each in kwargs.values():
-        field += "'" + each + "',"
-    field = field[:-1] + ')'
-
-    sql = "INSERT INTO %s %s" % (table_name, field)
-    return sql
-
-if __name__ == '__main__':
-
-    # 使用方法
-    with Mysql(**mysql) as m:
-        # results = m.executeSql("SELECT * FROM users;")
-        #
-        # for each in results:
-        #     print(each)
-        pass

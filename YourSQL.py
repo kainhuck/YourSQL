@@ -34,9 +34,30 @@ class Mysql(object):
     def update(self, table_name, new_items={}, where={}):
         self.executeSql(update(table_name, new_items, where))
 
-    def select(self, table_name, column_names=[], where={}, limit=None, offset=0):
+    def select_return_by_tuple(self, table_name, column_names=[], where={}, limit=None, offset=0):
         self.executeSql(select(table_name, column_names, where, limit, offset))
         return self.cursor.fetchall()
+
+    def select_return_by_dict(self, table_name, column_names=[], where={}, limit=None, offset=0):
+        self.executeSql(select(table_name, column_names, where, limit, offset))
+        result_tuple = self.cursor.fetchall()
+        result_dict = []
+        if len(column_names):
+            for item in result_tuple:
+                temp = {}
+                for i in range(len(column_names)):
+                    temp[column_names[i]] = item[i]
+                result_dict.append(temp)
+        else:
+            for column_info in self.cursor.description:
+                column_names.append(column_info[0])
+            for item in result_tuple:
+                temp = {}
+                for i in range(len(column_names)):
+                    temp[column_names[i]] = item[i]
+                result_dict.append(temp)
+
+        return result_dict
 
     def executeSql(self, sql):
         try:

@@ -60,16 +60,14 @@ with Mysql(**mysql) as m:
 ### 查(select)
 
 ```python
-with Mysql(**mysql) as m:
-    results = m.select("imgs",
-            column_names=["src", "alert"],
-            where={
-                "id": 1,
-                "alert": "foo"
-            },
-            limit=100,
-            offset=10)
-    for each in results:
-        print(each)
+ with Mysql(**mysql) as m:
+        result = m.select_return_by_dict(table_name="imgs", limit=10)
+        for each in result:
+            print(each)
+
+ with Mysql(**mysql) as m:
+        result = m.select_return_by_tuple(table_name="imgs", limit=10)
+        for each in result:
+            print(each)
 ```
 

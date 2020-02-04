@@ -41,8 +41,15 @@ if __name__ == '__main__':
     #     for i in range(10):
     #         m.insert("test", id=i, name="name_" + str(i))
 
+    # with Mysql(**mysql) as m:
+    #     result = m.select_return_by_dict(table_name="imgs", limit=10)
+    #     for each in result:
+    #         print(each)
+    #     # print(len(result))
+
     with Mysql(**mysql) as m:
-        result = m.select_return_by_dict(table_name="imgs", limit=10)
-        for each in result:
-            print(each)
-        # print(len(result))
+        result = m.select_return_by_tuple(table_name="imgs", limit=10)
+        print(result)
+        m.select_return_by_dict("imgs",["src", "alert"],{"src":"sdasd"},10,12)
+
+    print(select("imgs",["src", "alert"],{"src":"sdasd"},0,9))

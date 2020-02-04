@@ -78,10 +78,11 @@ def select(table_name, column_names=[], where={}, limit=None, offset=0):
     """
     构造sql选择语句
 
+    :param table_name: 要查询的表名  type: string
     :param column_names: 待查询的属性  type: list
-    :param where : 约束  type: dict
-    :param limit : 返回记录数  type: int
-    :param offset : SELECT语句开始查询的数据偏移量  type: int
+    :param where: 约束  type: dict
+    :param limit: 返回记录数  type: int
+    :param offset: SELECT语句开始查询的数据偏移量,必须指定limit  type: int
     :return: sql语句
 
     SELECT column_name,column_name

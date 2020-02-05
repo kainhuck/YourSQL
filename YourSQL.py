@@ -6,15 +6,16 @@ from sql_func import *
 
 
 class Mysql(object):
-    def __init__(self, host, username, passwd, database):
+    def __init__(self, host, port, user, password, database):
         self.host = host
-        self.username = username
-        self.passwd = passwd
+        self.port = port
+        self.user = user
+        self.password = password
         self.database = database
         self.cursor = None
 
     def __enter__(self):
-        self.db = pymysql.connect(self.host, self.username, self.passwd, self.database)
+        self.db = pymysql.connect(host=self.host,port=self.port,user=self.user, password=self.password, database=self.database)
         self.cursor = self.db.cursor()
         return self
 

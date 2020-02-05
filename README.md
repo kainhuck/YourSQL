@@ -15,10 +15,11 @@ from YourSQL import Mysql
 
 ```python
 mysql = {
-    "host": "127.0.0.1",
-    "username": "root",
-    "passwd": "12345678",
-    "database": "img"
+    "host": "localhost",
+    "port": 3306,   # 必须是 int 类型
+    "user": "root",
+    "password": "12345678",
+    "database": "img",
 }
 ```
 

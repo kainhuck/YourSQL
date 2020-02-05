@@ -4,10 +4,11 @@ from YourSQL import Mysql
 from sql_func import *
 
 mysql = {
-    "host": "127.0.0.1",
-    "username": "root",
-    "passwd": "12345678",
-    "database": "img"
+    "host": "localhost",
+    "port": 3306,   # 必须是 int 类型
+    "user": "root",
+    "password": "12345678",
+    "database": "img",
 }
 
 if __name__ == '__main__':
@@ -50,6 +51,7 @@ if __name__ == '__main__':
     with Mysql(**mysql) as m:
         result = m.select_return_by_tuple(table_name="imgs", limit=10)
         print(result)
-        m.select_return_by_dict("imgs",["src", "alert"],{"src":"sdasd"},10,12)
+        result = m.select_return_by_dict("imgs",["src", "alert"],limit=10,offset=12)
+        print(result)
 
-    print(select("imgs",["src", "alert"],{"src":"sdasd"},0,9))
+    # print(select("imgs",["src", "alert"],{"src":"sdasd"},0,9))
